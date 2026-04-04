@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Init</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F6F1EA;
+            --warm: #EDE5D8;
+            --deep: #1E1A16;
+            --ink: #2C2722;
+            --gray: #7A7268;
+            --pale: #B5ADA3;
+            --orange: #C4653A;
+            --orange-soft: #E8C4B0;
+            --paper: #FAFAF7;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { height:100%; overflow:hidden; }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--warm);
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* subtle grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px;
+            z-index: 9999;
+        }
+
+        .deck {
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 16 / 10;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 40px rgba(30,26,22,0.08), 0 0 0 1px rgba(30,26,22,0.04);
+        }
+
+        /* ========== SLIDES ========== */
+        .slide {
+            position: absolute;
+            inset: 0;
+            padding: 48px 56px;
+            display: flex;
+            flex-direction: column;
+            background: var(--paper);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.25,1,0.5,1), transform 0.6s cubic-bezier(0.25,1,0.5,1);
+            transform: translateX(40px);
+        }
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        /* Staggered children animation */
+        .slide.active .anim {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: reveal 0.5s cubic-bezier(0.25,1,0.5,1) forwards;
+        }
+        .slide.active .anim:nth-child(1) { animation-delay: 0.05s; }
+        .slide.active .anim:nth-child(2) { animation-delay: 0.12s; }
+        .slide.active .anim:nth-child(3) { animation-delay: 0.19s; }
+        .slide.active .anim:nth-child(4) { animation-delay: 0.26s; }
+        .slide.active .anim:nth-child(5) { animation-delay: 0.33s; }
+        .slide.active .anim:nth-child(6) { animation-delay: 0.40s; }
+        .slide.active .anim:nth-child(7) { animation-delay: 0.47s; }
+        .slide.active .anim:nth-child(8) { animation-delay: 0.54s; }
+
+        @keyframes reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--pale);
+            margin-bottom: 18px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 56px;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: var(--deep);
+            margin-bottom: 14px;
+        }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 38px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--deep);
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-family: 'Source Serif 4', serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--deep);
+            margin-bottom: 4px;
+        }
+        p {
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--gray);
+            max-width: 540px;
+        }
+        .accent { color: var(--orange); }
+
+        /* ========== DECORATIVE ELEMENTS ========== */
+        .deco-number {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 180px;
+            line-height: 1;
+            color: var(--warm);
+            position: absolute;
+            right: -10px;
+            top: -20px;
+            pointer-events: none;
+            user-select: none;
+        }
+        .deco-line {
+            width: 40px;
+            height: 3px;
+            background: var(--orange);
+            border-radius: 2px;
+            margin: 16px 0;
+        }
+        .deco-diamond {
+            width: 8px; height: 8px;
+            background: var(--orange);
+            transform: rotate(45deg);
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* ========== NAV ========== */
+        .nav {
+            position: absolute;
+            bottom: 24px;
+            left: 56px;
+            right: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+        .nav-btn {
+            width: 36px; height: 36px;
+            border: none;
+            background: transparent;
+            color: var(--pale);
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover { color: var(--orange); background: var(--warm); }
+        .nav-track {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .nav-pip {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--warm);
+            transition: all 0.4s cubic-bezier(0.25,1,0.5,1);
+            cursor: pointer;
+        }
+        .nav-pip.active {
+            background: var(--orange);
+            width: 28px;
+            border-radius: 3px;
+        }
+        .nav-idx {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--pale);
+        }
+
+        /* ========== COVER ========== */
+        .cover-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 500px 500px at 80% 50%, rgba(196,101,58,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 400px 300px at 20% 80%, rgba(196,101,58,0.04) 0%, transparent 70%);
+        }
+        .cover-logo {
+            position: absolute;
+            right: 56px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            pointer-events: none;
+            filter: drop-shadow(0 4px 24px rgba(196,101,58,0.15));
+        }
+        .cover-logo img {
+            width: 120px;
+            height: 120px;
+        }
+        .cover-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--deep);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+        .cover-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--orange);
+            padding: 6px 14px;
+            border: 1px solid var(--orange-soft);
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+        .cover-bottom {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .cover-stats {
+            display: flex;
+            gap: 32px;
+        }
+        .cover-stat {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--deep);
+            line-height: 1;
+        }
+        .cover-stat-label {
+            font-size: 11px;
+            color: var(--pale);
+            margin-top: 2px;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== FEATURES ========== */
+        .feat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: auto;
+        }
+        .feat {
+            padding: 22px 24px;
+            border-left: 2px solid var(--orange);
+            background: linear-gradient(90deg, rgba(232,196,176,0.06) 0%, transparent 60%);
+            transition: all 0.3s;
+        }
+        .feat:hover {
+            background: linear-gradient(90deg, rgba(232,196,176,0.14) 0%, transparent 60%);
+            transform: translateX(4px);
+        }
+        .feat-emoji {
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .feat-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--deep);
+            margin-bottom: 3px;
+        }
+        .feat-desc {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ========== MODES ========== */
+        .modes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            flex: 1;
+        }
+        .mode {
+            padding: 28px;
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .mode-a { background: var(--cream); }
+        .mode-b {
+            background: var(--deep);
+            color: var(--cream);
+        }
+        .mode-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .mode-a .mode-label { color: var(--pale); }
+        .mode-b .mode-label { color: var(--orange-soft); }
+        .mode h3 { font-size: 20px; margin-bottom: 6px; }
+        .mode p { font-size: 13px; }
+        .mode-b p { color: var(--pale); }
+        .mode-list {
+            list-style: none;
+            margin-top: auto;
+        }
+        .mode-list li {
+            font-size: 13px;
+            padding: 5px 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mode-b .mode-list li { color: rgba(255,255,255,0.6); }
+        .mode-list li::before {
+            content: '';
+            width: 4px; height: 4px;
+            background: var(--orange);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ========== CONFIG ========== */
+        .cfg-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            flex: 1;
+        }
+        .cfg {
+            padding: 18px 16px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .cfg:hover {
+            border-bottom-color: var(--orange);
+            background: var(--cream);
+        }
+        .cfg-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .cfg-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--deep);
+            margin-bottom: 4px;
+        }
+        .cfg-desc {
+            font-size: 12px;
+            color: var(--pale);
+            line-height: 1.4;
+        }
+
+        /* ========== FLOW ========== */
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 24px;
+            flex: 1;
+        }
+        .flow-step {
+            padding: 24px 20px;
+            border-right: 1px solid var(--warm);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .flow-step:hover { background: var(--cream); }
+        .flow-step:last-child { border-right: none; }
+        .flow-num {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 42px;
+            font-weight: 400;
+            color: var(--warm);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .flow-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--deep);
+            margin-bottom: 4px;
+        }
+        .flow-desc {
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ========== SCHEDULE ========== */
+        .sched {
+            margin-top: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0;
+        }
+        .sched-row {
+            display: grid;
+            grid-template-columns: 120px 32px 1fr;
+            align-items: start;
+            gap: 0;
+        }
+        .sched-period {
+            text-align: right;
+            padding-top: 4px;
+        }
+        .sched-day {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            color: var(--orange);
+            font-weight: 500;
+        }
+        .sched-dot-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 6px;
+        }
+        .sched-dot {
+            width: 10px; height: 10px;
+            background: var(--orange);
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 4px var(--paper);
+        }
+        .sched-line {
+            width: 2px;
+            flex: 1;
+            background: var(--warm);
+            min-height: 20px;
+        }
+        .sched-row:last-child .sched-line { display: none; }
+        .sched-content {
+            padding: 0 0 28px 20px;
+        }
+        .sched-row:last-child .sched-content { padding-bottom: 0; }
+        .sched-title {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--deep);
+            margin-bottom: 3px;
+        }
+        .sched-desc {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ========== TEMPLATES ========== */
+        .tpls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 20px;
+            flex: 1;
+        }
+        .tpl {
+            padding: 24px;
+            background: var(--cream);
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .tpl:hover {
+            box-shadow: 0 4px 20px rgba(30,26,22,0.06);
+            transform: translateY(-2px);
+        }
+        .tpl.featured {
+            grid-column: 1 / -1;
+            background: var(--deep);
+            color: var(--cream);
+            flex-direction: row;
+            align-items: center;
+            gap: 32px;
+        }
+        .tpl.featured .tpl-num { color: rgba(196,101,58,0.3); }
+        .tpl.featured .tpl-title { color: var(--cream); font-size: 18px; }
+        .tpl.featured .tpl-desc { color: var(--pale); font-size: 14px; }
+        .tpl.featured .tpl-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--orange);
+            background: rgba(196,101,58,0.15);
+            padding: 3px 10px;
+            border-radius: 2px;
+            margin-bottom: 8px;
+        }
+        .tpl-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--orange-soft);
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+        .tpl.featured .tpl-num {
+            font-size: 72px;
+            margin-bottom: 0;
+        }
+        .tpl-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--deep);
+            margin-bottom: 6px;
+        }
+        .tpl-desc {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ========== CTA ========== */
+        .cta {
+            background: var(--deep);
+            color: var(--cream);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .cta .eyebrow { color: var(--orange-soft); }
+        .cta h2 { color: var(--cream); font-size: 48px; }
+        .cta p { color: var(--pale); margin: 0 auto; }
+        .cta .deco-line { background: var(--orange-soft); margin: 20px auto; }
+        .cta-cmd {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--cream);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 28px;
+            border-radius: 2px;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+        .cta .nav-btn { color: rgba(255,255,255,0.3); }
+        .cta .nav-btn:hover { color: var(--orange-soft); background: rgba(255,255,255,0.06); }
+        .cta .nav-pip { background: rgba(255,255,255,0.12); }
+        .cta .nav-pip.active { background: var(--orange-soft); }
+        .cta .nav-idx { color: rgba(255,255,255,0.3); }
+
+        /* ========== KB HINT ========== */
+        .hint {
+            position: fixed;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--pale);
+            opacity: 0.5;
+        }
+        .hint kbd {
+            background: var(--paper);
+            border: 1px solid var(--warm);
+            border-radius: 3px;
+            padding: 1px 5px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="deck" id="deck">
+
+        <!-- 1: COVER -->
+        <div class="slide active" data-i="0">
+            <div class="cover-bg"></div>
+            <div class="cover-logo anim">
+                <img src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/openclaw-color.svg" alt="OpenClaw" onerror="this.parentElement.style.display='none'"/>
+                <span class="cover-logo-text">OpenClaw</span>
+            </div>
+            <div class="cover-tag anim">📬 clawhub.ai/winsaney/newsletter-init</div>
+            <h1 class="anim">Newsletter<br><span class="accent">Init</span></h1>
+            <div class="deco-line anim"></div>
+            <p class="anim" style="font-size:16px;color:var(--ink);max-width:440px;">
+                个性化信息简报生成技能。<br>搜索、筛选、整理、输出——一条龙。
+            </p>
+            <div class="cover-bottom anim">
+                <div class="cover-stats">
+                    <div><div class="cover-stat">2</div><div class="cover-stat-label">使用模式</div></div>
+                    <div><div class="cover-stat">3</div><div class="cover-stat-label">输出模板</div></div>
+                    <div><div class="cover-stat">6</div><div class="cover-stat-label">配置维度</div></div>
+                </div>
+                <div style="font-size:12px;color:var(--pale);font-family:'JetBrains Mono',monospace;">v1.0.0</div>
+            </div>
+        </div>
+
+        <!-- 2: OVERVIEW -->
+        <div class="slide" data-i="1">
+            <div class="eyebrow anim">Capability</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;flex:1;align-items:start;">
+                <div>
+                    <h2 class="anim">让 AI 成为你的<br><span class="accent">信息简报专家</span></h2>
+                    <div class="deco-line anim"></div>
+                    <p class="anim">从信息收集到结构化输出，全流程覆盖。无论是临时调研还是持续跟踪，一个技能搞定。</p>
+                    <div class="anim" style="margin-top:28px;padding:20px;background:var(--cream);border-radius:2px;">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:1px;margin-bottom:8px;">KEY INSIGHT</div>
+                        <div style="font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--deep);line-height:1.4;">"信噪比优先"——不追求信息量，<br>只输出值得你花时间读的内容。</div>
+                    </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                    <div class="feat anim" style="animation-delay:0.15s;">
+                        <span class="feat-emoji">🔍</span>
+                        <div class="feat-title">智能搜索</div>
+                        <div class="feat-desc">多源聚合，精准捕获领域信息</div>
+                    </div>
+                    <div class="feat anim" style="animation-delay:0.25s;">
+                        <span class="feat-emoji">🎯</span>
+                        <div class="feat-title">信噪比优先</div>
+                        <div class="feat-desc">基于偏好筛选，过滤低质信息</div>
+                    </div>
+                    <div class="feat anim" style="animation-delay:0.35s;">
+                        <span class="feat-emoji">📝</span>
+                        <div class="feat-title">结构化输出</div>
+                        <div class="feat-desc">按栏目分类，清晰有序的简报</div>
+                    </div>
+                    <div class="feat anim" style="animation-delay:0.45s;">
+                        <span class="feat-emoji">🔄</span>
+                        <div class="feat-title">持续进化</div>
+                        <div class="feat-desc">反馈驱动，越用越懂你的需求</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3: MODES -->
+        <div class="slide" data-i="2">
+            <div class="eyebrow anim">Two Modes</div>
+            <h2 class="anim">两种<span class="accent">模式</span></h2>
+            <p class="anim">按需选择，各有侧重。</p>
+            <div class="modes anim">
+                <div class="mode mode-a">
+                    <div class="mode-label">Mode A — 一次性</div>
+                    <h3>⚡ 即时简报</h3>
+                    <p>临时性、探索性的信息需求，指定主题即可生成。</p>
+                    <ul class="mode-list">
+                        <li>无需预先配置</li>
+                        <li>灵活调整输出</li>
+                        <li>适合快速调研</li>
+                    </ul>
+                </div>
+                <div class="mode mode-b">
+                    <div class="mode-label">Mode B — 定期</div>
+                    <h3>📅 持续简报</h3>
+                    <p>日更/周更/月更的自动化信息推送。</p>
+                    <ul class="mode-list">
+                        <li>配置信源与周期</li>
+                        <li>定制输出模板</li>
+                        <li>反馈驱动迭代</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4: CONFIG -->
+        <div class="slide" data-i="3">
+            <div class="eyebrow anim">Configuration</div>
+            <h2 class="anim">需求<span class="accent">配置</span></h2>
+            <p class="anim">生成前，Agent 会先澄清这些核心信息。</p>
+            <div class="cfg-grid anim">
+                <div class="cfg">
+                    <div class="cfg-icon">📌</div>
+                    <div class="cfg-title">主题范围</div>
+                    <div class="cfg-desc">AI 前沿、SaaS 创业、投资理财…</div>
+                </div>
+                <div class="cfg">
+                    <div class="cfg-icon">📡</div>
+                    <div class="cfg-title">信源偏好</div>
+                    <div class="cfg-desc">权威媒体、技术博客、学术论文…</div>
+                </div>
+                <div class="cfg">
+                    <div class="cfg-icon">📏</div>
+                    <div class="cfg-title">内容深度</div>
+                    <div class="cfg-desc">摘要 50–100 字 / 深度 200–300 字</div>
+                </div>
+                <div class="cfg">
+                    <div class="cfg-icon">📊</div>
+                    <div class="cfg-title">信息量</div>
+                    <div class="cfg-desc">每期 5 / 10 / 20 条</div>
+                </div>
+                <div class="cfg">
+                    <div class="cfg-icon">🗂️</div>
+                    <div class="cfg-title">栏目结构</div>
+                    <div class="cfg-desc">动态、工具、阅读、观点…</div>
+                </div>
+                <div class="cfg">
+                    <div class="cfg-icon">📤</div>
+                    <div class="cfg-title">输出格式</div>
+                    <div class="cfg-desc">Markdown / 纯文本 / 自定义</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5: FLOW -->
+        <div class="slide" data-i="4">
+            <div class="eyebrow anim">Workflow</div>
+            <h2 class="anim">四步<span class="accent">生产流程</span></h2>
+            <p class="anim">一次性简报的标准化流程。</p>
+            <div class="flow anim">
+                <div class="flow-step">
+                    <div class="flow-num">I</div>
+                    <div class="flow-title">搜索</div>
+                    <div class="flow-desc">根据主题进行网络搜索，多源聚合相关信息</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num">II</div>
+                    <div class="flow-title">筛选</div>
+                    <div class="flow-desc">按信源偏好和质量标准，过滤最有价值内容</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num">III</div>
+                    <div class="flow-title">整理</div>
+                    <div class="flow-desc">按栏目结构分类，撰写每条信息的摘要</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num">IV</div>
+                    <div class="flow-title">输出</div>
+                    <div class="flow-desc">使用模板生成最终简报，供审阅使用</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6: SCHEDULE -->
+        <div class="slide" data-i="5">
+            <div class="eyebrow anim">Weekly Rhythm</div>
+            <h2 class="anim">周更<span class="accent">节奏</span></h2>
+            <p class="anim">以周五发布为例的推荐工作节奏。</p>
+            <div class="sched anim">
+                <div class="sched-row">
+                    <div class="sched-period"><div class="sched-day">周一 → 周四</div></div>
+                    <div class="sched-dot-col"><div class="sched-dot"></div><div class="sched-line"></div></div>
+                    <div class="sched-content">
+                        <div class="sched-title">📥 信息收集</div>
+                        <div class="sched-desc">每日扫描配置信源，将有价值的内容摘录到素材池，标记优先级和分类</div>
+                    </div>
+                </div>
+                <div class="sched-row">
+                    <div class="sched-period"><div class="sched-day">周五 · 上午</div></div>
+                    <div class="sched-dot-col"><div class="sched-dot"></div><div class="sched-line"></div></div>
+                    <div class="sched-content">
+                        <div class="sched-title">🔍 筛选整理</div>
+                        <div class="sched-desc">浏览本周积累的素材，筛选最有价值的内容，按栏目结构分类整理</div>
+                    </div>
+                </div>
+                <div class="sched-row">
+                    <div class="sched-period"><div class="sched-day">周五 · 下午</div></div>
+                    <div class="sched-dot-col"><div class="sched-dot"></div><div class="sched-line"></div></div>
+                    <div class="sched-content">
+                        <div class="sched-title">✍️ 撰写输出</div>
+                        <div class="sched-desc">根据模板撰写简报，用户审阅并调整，输出最终版本</div>
+                    </div>
+                </div>
+                <div class="sched-row">
+                    <div class="sched-period"><div class="sched-day">周末</div></div>
+                    <div class="sched-dot-col"><div class="sched-dot"></div></div>
+                    <div class="sched-content">
+                        <div class="sched-title">🔄 反馈优化</div>
+                        <div class="sched-desc">收集用户反馈，调整信源列表和筛选标准，优化下周工作流</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7: TEMPLATES -->
+        <div class="slide" data-i="6">
+            <div class="deco-number anim" style="opacity:0.1;">T</div>
+            <div class="eyebrow anim">Templates</div>
+            <h2 class="anim">输出<span class="accent">模板</span></h2>
+            <p class="anim">三套可选模板，也支持从零定制。</p>
+            <div class="tpls anim">
+                <div class="tpl">
+                    <div class="tpl-num">01</div>
+                    <div class="tpl-title">基础模板</div>
+                    <div class="tpl-desc">简洁版：要点摘要 + 详细内容 + 扩展阅读，快速获取核心信息</div>
+                </div>
+                <div class="tpl">
+                    <div class="tpl-num">02</div>
+                    <div class="tpl-title">高级模板</div>
+                    <div class="tpl-desc">完整版：自定义栏目结构、Issue 编号、多分类管理</div>
+                </div>
+                <div class="tpl featured">
+                    <div class="tpl-num">03</div>
+                    <div>
+                        <div class="tpl-tag">RECOMMENDED</div>
+                        <div class="tpl-title">完全自定义</div>
+                        <div class="tpl-desc">从零设计输出格式，完全匹配个人需求和品牌风格。Agent 根据你的具体要求，打造独一无二的简报样式。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8: CTA -->
+        <div class="slide cta" data-i="7">
+            <div class="eyebrow anim">Get Started</div>
+            <h2 class="anim">开始使用</h2>
+            <div class="deco-line anim" style="margin:20px auto;"></div>
+            <p class="anim">一行命令，让 AI 智能体变成你的专属信息简报助手。</p>
+            <div class="cta-cmd anim">clawhub install newsletter-init</div>
+        </div>
+
+    </div>
+
+    <div class="hint"><kbd>←</kbd> <kbd>→</kbd> 翻页</div>
+
+    <script>
+        let cur = 0;
+        const N = 8;
+
+        function goTo(i) {
+            if (i < 0 || i >= N || i === cur) return;
+            const slides = document.querySelectorAll('.slide');
+            slides[cur].classList.remove('active');
+            // Force animation re-trigger on entering slide
+            slides[i].querySelectorAll('.anim').forEach(el => {
+                el.style.animation = 'none';
+                void el.offsetHeight;
+                el.style.animation = '';
+            });
+            slides[i].classList.add('active');
+            cur = i;
+        }
+
+        function goNext() { goTo(cur + 1); }
+        function goPrev() { goTo(cur - 1); }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goNext(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+        });
+    </script>
+</body>
+</html>
