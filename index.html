@@ -1060,10 +1060,6 @@
             font-size: 10px;
         }
 
-        /* ========== HIDE NAVIGATION ========== */
-        .slide-nav { display: none !important; }
-        .hint { display: none !important; }
-
         /* ========== MOBILE PROGRESS BAR ========== */
         @media (max-width: 768px) {
             .mobile-progress {
@@ -1080,6 +1076,11 @@
                 background: var(--orange);
                 transition: width 0.3s cubic-bezier(0.25,1,0.5,1);
             }
+        }
+
+        /* ========== HIDE BOTTOM NAVIGATION ========== */
+        .hint {
+            display: none !important;
         }
     </style>
 </head>
