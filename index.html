@@ -699,6 +699,7 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 16px;
                 margin-top: 20px;
+                flex: 0 1 auto;
             }
         }
         @media (max-width: 480px) {
@@ -718,9 +719,10 @@
         .flow-step:hover { background: var(--cream); }
         @media (max-width: 768px) {
             .flow-step {
-                padding: 20px 16px;
+                padding: 16px 14px;
                 border-right: none;
                 border-bottom: 1px solid var(--warm);
+                min-height: 0;
             }
             .flow-step:hover { background: transparent; }
             .flow-step:last-child { border-bottom: none; }
@@ -881,6 +883,7 @@
             .tpls {
                 grid-template-columns: 1fr;
                 gap: 12px;
+                flex: 0 1 auto;
             }
         }
         .tpl {
@@ -895,7 +898,7 @@
         }
         @media (max-width: 768px) {
             .tpl {
-                padding: 20px;
+                padding: 16px;
             }
         }
         .tpl:hover {
@@ -920,7 +923,8 @@
             .tpl.featured {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 16px;
+                gap: 12px;
+                padding: 18px;
             }
         }
         .tpl.featured .tpl-num { color: rgba(196,101,58,0.3); }
@@ -954,8 +958,8 @@
         }
         @media (max-width: 768px) {
             .tpl-num {
-                font-size: 32px;
-                margin-bottom: 10px;
+                font-size: 28px;
+                margin-bottom: 8px;
             }
         }
         .tpl.featured .tpl-num {
@@ -992,6 +996,13 @@
             justify-content: center;
             text-align: center;
         }
+        @media (max-width: 768px) {
+            .cta {
+                padding: 60px 24px;
+                justify-content: center;
+                min-height: auto;
+            }
+        }
         .cta .eyebrow { color: var(--orange-soft); }
         .cta h2 { color: var(--cream); font-size: 48px; }
         @media (max-width: 768px) {
@@ -999,6 +1010,9 @@
         }
         .cta p { color: var(--pale); margin: 0 auto; }
         .cta .deco-line { background: var(--orange-soft); margin: 20px auto; }
+        @media (max-width: 768px) {
+            .cta .deco-line { margin: 16px auto; }
+        }
         .cta-cmd {
             font-family: 'JetBrains Mono', monospace;
             font-size: 14px;
@@ -1015,6 +1029,7 @@
                 font-size: 12px;
                 padding: 10px 20px;
                 word-break: break-all;
+                max-width: 100%;
             }
         }
         .cta .nav-btn { color: rgba(255,255,255,0.3); }
