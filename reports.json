@@ -1,0 +1,24 @@
+[
+  {
+    "id": "2026-W17",
+    "year": 2026,
+    "week": "W17",
+    "dateRange": "2026年4月27日 - 4月30日",
+    "title": "国产算力动态周报",
+    "summary": "财报季+适配周：三大AI芯片厂商Q1财报密集披露，DeepSeek V4发布8大国产芯片Day 0适配完成",
+    "href": "reports/2026-W17.html",
+    "tags": ["财报", "DeepSeek", "IPO"],
+    "latest": true
+  },
+  {
+    "id": "2026-W16",
+    "year": 2026,
+    "week": "W16",
+    "dateRange": "2026年4月17日 - 4月23日",
+    "title": "国产算力周报",
+    "summary": "覆盖华为昇腾、寒武纪、海光信息等10家核心厂商，追踪国产AI算力产业链每周动态",
+    "href": "reports/2026-W16.html",
+    "tags": ["昇腾", "DeepSeek", "港股上市"],
+    "latest": false
+  }
+]
