@@ -1,5 +1,16 @@
 [
   {
+    "id": "2026-W18",
+    "year": 2026,
+    "week": "W18",
+    "dateRange": "2026年5月1日 - 5月7日",
+    "title": "国产算力动态周报",
+    "summary": "业绩兑现期到来：59条情报追踪10家厂商，从"可用"到"好用"，从烧钱到盈利，从国产替代到全球竞争",
+    "href": "reports/2026-W18.html",
+    "tags": ["兑现期", "业绩", "IPO"],
+    "latest": true
+  },
+  {
     "id": "2026-W17",
     "year": 2026,
     "week": "W17",
@@ -8,7 +19,7 @@
     "summary": "财报季+适配周：三大AI芯片厂商Q1财报密集披露，DeepSeek V4发布8大国产芯片Day 0适配完成",
     "href": "reports/2026-W17.html",
     "tags": ["财报", "DeepSeek", "IPO"],
-    "latest": true
+    "latest": false
   },
   {
     "id": "2026-W16",
