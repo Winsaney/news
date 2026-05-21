@@ -64,16 +64,25 @@
     .app-shell {
       position: relative;
       z-index: 4;
-      display: grid;
-      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      display: flex;
       height: 100vh;
+      overflow: hidden;
+    }
+
+    @media (min-width: 901px) {
+      .app-shell.collapsed .sidebar {
+        margin-left: calc(var(--sidebar) * -1);
+      }
     }
 
     .sidebar {
+      width: var(--sidebar);
+      flex-shrink: 0;
       height: 100vh;
       position: sticky;
       top: 0;
       display: flex;
+      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       flex-direction: column;
       overflow: hidden;
       border-right: 1px solid rgba(31, 37, 36, 0.13);
@@ -210,6 +219,7 @@
     }
 
     .main {
+      flex: 1;
       min-width: 0;
       min-height: 100vh;
       padding: 22px;
@@ -281,7 +291,8 @@
     }
 
     .menu-button {
-      display: none;
+      display: grid;
+      flex: 0 0 auto;
     }
 
     .viewer-wrap {
@@ -590,14 +601,27 @@
       renderHistory();
     }
 
+    function toggleSidebar() {
+      if (window.innerWidth > 900) {
+        document.querySelector('.app-shell').classList.toggle('collapsed');
+      } else {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+      }
+    }
+
     function openSidebar() {
-      sidebar.classList.add('open');
-      overlay.classList.add('show');
+      if (window.innerWidth <= 900) {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+      }
     }
 
     function closeSidebar() {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('show');
+      if (window.innerWidth <= 900) {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+      }
     }
 
     async function init() {
@@ -614,7 +638,7 @@
       selectReport(initialReport, false);
     }
 
-    menuButton.addEventListener('click', openSidebar);
+    menuButton.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', closeSidebar);
     window.addEventListener('hashchange', () => {
       const hashId = decodeURIComponent(window.location.hash.replace(/^#/, ''));
