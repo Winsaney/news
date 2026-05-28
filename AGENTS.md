@@ -15,7 +15,7 @@ reports/
   YYYY-WXX.html     — 每期周报（自包含单文件 HTML），如 2026-W21.html
 vercel.json         — Vercel 配置（reports.json 缓存 60s + must-revalidate）
 package.json        — 唯一依赖：@vercel/analytics
-agents.md           — 本文件，项目说明供 AI Agent 阅读
+AGENTS.md           — 本文件，项目说明供 AI Agent 阅读
 ```
 
 ## index.html 架构
