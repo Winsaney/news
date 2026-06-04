@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国产算力厂家动态周报 | 2026W22</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F6F1EA;
+            --warm: #EDE5D8;
+            --deep: #1E1A16;
+            --ink: #2C2722;
+            --gray: #7A7268;
+            --pale: #B5ADA3;
+            --orange: #C4653A;
+            --orange-soft: #E8C4B0;
+            --paper: #FAFAF7;
+            --h1-size: 56px;
+            --h2-size: 38px;
+            --h3-size: 16px;
+            --body-size: 15px;
+            --slide-padding: 48px 56px;
+            --deck-aspect: 16 / 10;
+        }
+        @media (max-width: 768px) {
+            :root {
+                --h1-size: 36px;
+                --h2-size: 28px;
+                --h3-size: 15px;
+                --body-size: 14px;
+                --slide-padding: 32px 24px;
+                --deck-aspect: auto;
+            }
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { height:100%; overflow:hidden; }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--warm);
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            body { padding:0; justify-content:flex-start; background:var(--paper); }
+            html { overflow-y:auto; }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px;
+            z-index: 9999;
+        }
+
+        .deck {
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: var(--deck-aspect);
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 40px rgba(30,26,22,0.08), 0 0 0 1px rgba(30,26,22,0.04);
+        }
+        @media (max-width: 768px) {
+            .deck { max-width:100%; border-radius:0; box-shadow:none; padding-bottom:80px; }
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            padding: var(--slide-padding);
+            display: flex;
+            flex-direction: column;
+            background: var(--paper);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.25,1,0.5,1), transform 0.6s cubic-bezier(0.25,1,0.5,1);
+            transform: translateX(40px);
+        }
+        .slide.active { opacity:1; pointer-events:auto; transform:translateX(0); }
+        @media (max-width: 768px) {
+            .slide { position:relative; opacity:1; pointer-events:auto; transform:none; min-height:auto; page-break-after:always; }
+            .slide:not(.active) { display:none; }
+            .slide.active { display:flex; }
+        }
+
+        .slide.active .anim {
+            opacity:0; transform:translateY(16px);
+            animation: reveal 0.5s cubic-bezier(0.25,1,0.5,1) forwards;
+        }
+        .slide.active .anim:nth-child(1){animation-delay:.05s}
+        .slide.active .anim:nth-child(2){animation-delay:.12s}
+        .slide.active .anim:nth-child(3){animation-delay:.19s}
+        .slide.active .anim:nth-child(4){animation-delay:.26s}
+        .slide.active .anim:nth-child(5){animation-delay:.33s}
+        .slide.active .anim:nth-child(6){animation-delay:.40s}
+        .slide.active .anim:nth-child(7){animation-delay:.47s}
+        .slide.active .anim:nth-child(8){animation-delay:.54s}
+        .slide.active .anim:nth-child(9){animation-delay:.61s}
+        .slide.active .anim:nth-child(10){animation-delay:.68s}
+        @media (max-width: 768px) {
+            .slide.active .anim { animation-delay:0s!important; }
+        }
+        @keyframes reveal { to { opacity:1; transform:translateY(0); } }
+
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; font-weight: 500;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: var(--pale); margin-bottom: 18px;
+        }
+        @media (max-width: 768px) {
+            .eyebrow { font-size:9px; letter-spacing:2px; margin-bottom:14px; }
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900; font-size: var(--h1-size);
+            line-height: 1.05; letter-spacing: -2px;
+            color: var(--deep); margin-bottom: 14px;
+        }
+        @media (max-width: 768px) { h1 { letter-spacing:-1px; margin-bottom:12px; } }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; font-size: var(--h2-size);
+            line-height: 1.1; letter-spacing: -1px;
+            color: var(--deep); margin-bottom: 10px;
+        }
+        @media (max-width: 768px) { h2 { letter-spacing:-0.5px; margin-bottom:8px; } }
+        h3 {
+            font-family: 'Source Serif 4', serif;
+            font-weight: 700; font-size: var(--h3-size);
+            color: var(--deep); margin-bottom: 4px;
+        }
+        p {
+            font-size: var(--body-size); line-height: 1.65;
+            color: var(--gray); max-width: 540px;
+        }
+        @media (max-width: 768px) { p { max-width:100%; } }
+        .accent { color: var(--orange); }
+
+        .deco-number {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400; font-style: italic;
+            font-size: 180px; line-height: 1;
+            color: var(--warm); position: absolute;
+            right: -10px; top: -20px;
+            pointer-events: none; user-select: none;
+        }
+        @media (max-width: 768px) { .deco-number { font-size:100px; right:-20px; top:-40px; } }
+        .deco-line {
+            width: 40px; height: 3px;
+            background: var(--orange); border-radius: 2px;
+            margin: 16px 0;
+        }
+        @media (max-width: 768px) { .deco-line { width:32px; margin:12px 0; } }
+
+        /* COVER */
+        .cover-bg {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 500px 500px at 80% 50%, rgba(196,101,58,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 400px 300px at 20% 80%, rgba(196,101,58,0.04) 0%, transparent 70%);
+        }
+        @media (max-width: 768px) {
+            .cover-bg {
+                background:
+                    radial-gradient(ellipse 300px 300px at 90% 20%, rgba(196,101,58,0.06) 0%, transparent 70%),
+                    radial-gradient(ellipse 200px 200px at 10% 80%, rgba(196,101,58,0.04) 0%, transparent 70%);
+            }
+        }
+        .cover-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; font-weight: 500; color: var(--orange);
+            padding: 6px 14px; border: 1px solid var(--orange-soft);
+            border-radius: 4px; margin-bottom: 24px;
+        }
+        @media (max-width: 768px) { .cover-tag { font-size:10px; padding:5px 12px; margin-bottom:16px; } }
+        .cover-bottom {
+            margin-top: auto;
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        @media (max-width: 768px) { .cover-bottom { flex-direction:column; align-items:flex-start; gap:24px; } }
+        .cover-stats { display: flex; gap: 32px; }
+        @media (max-width: 768px) { .cover-stats { gap:24px; flex-wrap:wrap; } }
+        .cover-stat {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px; font-weight: 700;
+            color: var(--deep); line-height: 1;
+        }
+        @media (max-width: 768px) { .cover-stat { font-size:32px; } }
+        .cover-stat-label {
+            font-size: 11px; color: var(--pale); margin-top: 2px;
+            font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;
+        }
+
+        /* FEATURES */
+        .feat-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 14px; margin-top: auto;
+        }
+        @media (max-width: 768px) { .feat-grid { grid-template-columns:1fr; gap:12px; } }
+        .feat {
+            padding: 22px 24px;
+            border-left: 2px solid var(--orange);
+            background: linear-gradient(90deg, rgba(232,196,176,0.06) 0%, transparent 60%);
+            transition: all 0.3s;
+        }
+        @media (max-width: 768px) { .feat { padding:16px 18px; } }
+        .feat:hover {
+            background: linear-gradient(90deg, rgba(232,196,176,0.14) 0%, transparent 60%);
+            transform: translateX(4px);
+        }
+        @media (max-width: 768px) { .feat:hover { transform:none; } }
+        .feat-emoji { font-size: 20px; margin-bottom: 8px; display: block; line-height: 1; height: 24px; }
+        .feat-title { font-weight: 700; font-size: 15px; color: var(--deep); margin-bottom: 3px; }
+        .feat-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+        /* DATA CARDS */
+        .data-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 16px; margin-top: 24px; flex: 1; align-items: start;
+        }
+        @media (max-width: 768px) { .data-grid { grid-template-columns:1fr 1fr; gap:12px; } }
+        .data-card {
+            padding: 24px; background: var(--cream); border-radius: 2px;
+            position: relative; overflow: hidden;
+            transition: all 0.3s;
+        }
+        .data-card:hover { box-shadow: 0 4px 20px rgba(30,26,22,0.06); transform: translateY(-2px); }
+        @media (max-width: 768px) { .data-card:hover { transform:none; box-shadow:none; } }
+        .data-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px; font-weight: 700;
+            color: var(--orange); line-height: 1;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: baseline;
+        }
+        .data-unit {
+            font-family: 'Source Serif 4', serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--orange);
+            margin-left: 2px;
+            line-height: 1;
+        }
+        @media (max-width: 768px) { .data-value { font-size:28px; } .data-unit { font-size:13px; } }
+        .data-label {
+            font-size: 12px; color: var(--gray);
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+        .data-change {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: var(--orange);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        /* TABLE */
+        .tbl-wrap {
+            margin-top: 20px; flex: 1; overflow: hidden;
+        }
+        .tbl {
+            width: 100%; border-collapse: collapse;
+            font-size: 13px;
+        }
+        @media (max-width: 768px) { .tbl { font-size:12px; } }
+        .tbl th {
+            text-align: left; padding: 10px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: 1px;
+            text-transform: uppercase; color: var(--pale);
+            border-bottom: 2px solid var(--warm);
+        }
+        .tbl td {
+            padding: 10px 14px; color: var(--ink);
+            border-bottom: 1px solid rgba(237,229,216,0.5);
+            line-height: 1.5;
+            vertical-align: baseline;
+        }
+        .tbl tr:hover td { background: var(--cream); }
+        .tbl .highlight { color: var(--orange); font-weight: 700; }
+
+        /* CHIP GRID */
+        .chip-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 10px; margin-top: 20px; flex: 1;
+        }
+        @media (max-width: 768px) { .chip-grid { grid-template-columns:1fr 1fr; gap:8px; } }
+        .chip {
+            padding: 16px; background: var(--cream); border-radius: 2px;
+            text-align: center; transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .chip:hover { border-bottom-color: var(--orange); transform: translateY(-2px); }
+        @media (max-width: 768px) { .chip:hover { transform:none; } }
+        .chip-icon { font-size: 22px; line-height: 1; height: 28px; display: flex; align-items: center; margin-bottom: 6px; }
+        .chip-name { font-weight: 700; font-size: 13px; color: var(--deep); margin-bottom: 4px; line-height: 1.3; }
+        .chip-status { font-size: 11px; color: var(--orange); font-family: 'JetBrains Mono', monospace; line-height: 1.3; }
+        .chip-desc { font-size: 11px; color: var(--gray); margin-top: 4px; line-height: 1.4; }
+
+        /* CHIP GRID - FAIL VARIANT */
+        .chip-grid-fail {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 10px; margin-top: 16px;
+        }
+        @media (max-width: 768px) { .chip-grid-fail { grid-template-columns:1fr 1fr; gap:8px; } }
+        .chip-fail {
+            padding: 14px; background: var(--cream); border-radius: 2px;
+            text-align: center;
+            border-bottom: 2px solid transparent;
+            display: flex; flex-direction: column; align-items: center;
+            opacity: 0.7;
+        }
+        .chip-fail .chip-status { color: var(--pale); }
+
+        /* FLOW */
+        .flow {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 0; margin-top: 24px; flex: 1;
+        }
+        @media (max-width: 768px) { .flow { grid-template-columns:1fr; gap:16px; flex:0 1 auto; } }
+        .flow-step {
+            padding: 24px 20px;
+            border-right: 1px solid var(--warm);
+            display: flex; flex-direction: column;
+            position: relative; transition: background 0.3s;
+        }
+        .flow-step:hover { background: var(--cream); }
+        @media (max-width: 768px) {
+            .flow-step { padding:16px 14px; border-right:none; border-bottom:1px solid var(--warm); }
+            .flow-step:hover { background:transparent; }
+            .flow-step:last-child { border-bottom:none; }
+        }
+        .flow-step:last-child { border-right: none; }
+        .flow-num {
+            font-family: 'Playfair Display', serif;
+            font-style: italic; font-size: 42px; font-weight: 400;
+            color: var(--warm); line-height: 1; margin-bottom: 12px;
+        }
+        @media (max-width: 768px) { .flow-num { font-size:32px; margin-bottom:8px; } }
+        .flow-title { font-weight: 700; font-size: 15px; color: var(--deep); margin-bottom: 4px; }
+        @media (max-width: 768px) { .flow-title { font-size:14px; } }
+        .flow-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+        @media (max-width: 768px) { .flow-desc { font-size:11px; line-height:1.6; } }
+
+        /* CTA / END */
+        .cta {
+            background: var(--deep); color: var(--cream);
+            align-items: center; justify-content: center; text-align: center;
+        }
+        @media (max-width: 768px) { .cta { padding:60px 24px; justify-content:center; min-height:auto; } }
+        .cta .eyebrow { color: var(--orange-soft); }
+        .cta h2 { color: var(--cream); font-size: 48px; }
+        @media (max-width: 768px) { .cta h2 { font-size:32px; } }
+        .cta p { color: var(--pale); margin: 0 auto; }
+        .cta .deco-line { background: var(--orange-soft); margin: 20px auto; }
+        @media (max-width: 768px) { .cta .deco-line { margin:16px auto; } }
+        .cta .nav-pip { background: rgba(255,255,255,0.12); }
+        .cta .nav-pip.active { background: var(--orange-soft); }
+
+        /* NAV */
+        .slide-nav {
+            display: flex; align-items: center; justify-content: center;
+            gap: 16px; margin-top: 16px;
+        }
+        .slide-nav button {
+            width: 40px; height: 40px;
+            border: 1px solid var(--warm);
+            background: rgba(250,250,247,0.9);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            color: var(--gray); cursor: pointer;
+            font-size: 18px; display: flex;
+            align-items: center; justify-content: center;
+            border-radius: 50%; transition: all 0.3s;
+        }
+        .slide-nav button:hover { color:var(--orange); border-color:var(--orange); box-shadow:0 2px 12px rgba(196,101,58,0.15); }
+        .slide-nav button:disabled { opacity:0.3; cursor:default; pointer-events:none; }
+        .slide-nav .nav-counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--pale);
+            min-width: 40px; text-align: center;
+        }
+        @media (max-width: 768px) {
+            .slide-nav {
+                position:fixed; bottom:0; left:0; right:0; margin:0;
+                padding:12px 20px calc(12px + env(safe-area-inset-bottom));
+                background:var(--paper); border-top:1px solid var(--warm);
+                justify-content:space-between; z-index:100;
+            }
+            .slide-nav button { width:44px; height:44px; border:none; background:transparent; font-size:24px; }
+            .slide-nav .nav-counter { font-size:13px; color:var(--orange); font-weight:500; }
+        }
+        .nav-track { display:flex; gap:6px; align-items:center; }
+        .nav-pip {
+            width:6px; height:6px; border-radius:50%;
+            background:var(--warm);
+            transition:all 0.4s cubic-bezier(0.25,1,0.5,1);
+            cursor:pointer;
+        }
+        .nav-pip.active { background:var(--orange); width:28px; border-radius:3px; }
+        @media (max-width: 768px) { .nav-pip { width:8px; height:8px; } .nav-pip.active { width:24px; } }
+
+        .hint { display:none!important; }
+
+        @media (max-width: 768px) {
+            .mobile-progress {
+                position:fixed; top:0; left:0; right:0;
+                height:3px; background:var(--warm); z-index:1000;
+            }
+            .mobile-progress-bar {
+                height:100%; background:var(--orange);
+                transition:width 0.3s cubic-bezier(0.25,1,0.5,1);
+            }
+        }
+
+        /* IPO CARDS */
+        .ipo-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 14px; margin-top: 24px; flex: 1;
+        }
+        @media (max-width: 768px) { .ipo-grid { grid-template-columns:1fr; gap:12px; } }
+        .ipo-card {
+            padding: 24px; background: var(--cream); border-radius: 2px;
+            position: relative; overflow: hidden;
+            transition: all 0.3s;
+        }
+        .ipo-card:hover { box-shadow:0 4px 20px rgba(30,26,22,0.06); transform:translateY(-2px); }
+        @media (max-width: 768px) { .ipo-card:hover { transform:none; } }
+        .ipo-card.featured {
+            background: var(--deep); color: var(--cream);
+        }
+        .ipo-card.featured .ipo-name { color: var(--cream); }
+        .ipo-card.featured .ipo-detail { color: var(--pale); }
+        .ipo-card.featured .ipo-tag { color: var(--orange); background: rgba(196,101,58,0.15); }
+        .ipo-name { font-weight:700; font-size:17px; color:var(--deep); margin-bottom:8px; }
+        .ipo-tag {
+            display:inline-block;
+            font-family:'JetBrains Mono',monospace;
+            font-size:10px; letter-spacing:1px;
+            color:var(--orange);
+            background:rgba(196,101,58,0.08);
+            padding:3px 10px; border-radius:2px;
+            margin-bottom:10px;
+        }
+        .ipo-detail { font-size:13px; color:var(--gray); line-height:1.6; }
+        .ipo-card.featured .ipo-detail strong { color: var(--orange-soft); }
+
+        /* TREND BLOCK */
+        .trend-grid {
+            display: grid; grid-template-columns: 1fr;
+            gap: 14px; margin-top: 24px; flex: 1;
+        }
+        .trend-item {
+            padding: 24px 28px;
+            border-left: 3px solid var(--orange);
+            background: linear-gradient(90deg, rgba(232,196,176,0.06) 0%, transparent 60%);
+            transition: all 0.3s;
+        }
+        @media (max-width: 768px) { .trend-item { padding:18px 20px; } }
+        .trend-item:hover { background:linear-gradient(90deg, rgba(232,196,176,0.14) 0%, transparent 60%); transform:translateX(4px); }
+        @media (max-width: 768px) { .trend-item:hover { transform:none; } }
+        .trend-num {
+            font-family:'Playfair Display',serif;
+            font-style:italic; font-size:24px;
+            color:var(--orange-soft); margin-bottom:4px;
+        }
+        .trend-title { font-weight:700; font-size:16px; color:var(--deep); margin-bottom:6px; }
+        .trend-desc { font-size:13px; color:var(--gray); line-height:1.6; max-width:600px; }
+
+        /* SOURCE LINKS */
+        .slide-sources {
+            margin-top: auto;
+            padding-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+        .slide-sources a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--pale);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
+        }
+        .slide-sources a:hover { color: var(--orange); }
+        .slide-sources a::before { content: '→ '; color: var(--warm); }
+    </style>
+</head>
+<body>
+    <div class="mobile-progress" id="mobileProgress" style="display:none;">
+        <div class="mobile-progress-bar" id="mobileProgressBar"></div>
+    </div>
+    <div class="deck" id="deck">
+
+        <!-- 1: COVER -->
+        <div class="slide active" data-i="0">
+            <div class="cover-bg"></div>
+            <div class="cover-tag anim">📊 2026年5月29日 — 6月4日</div>
+            <h1 class="anim">国产算力厂家<br><span class="accent">动态周报</span></h1>
+            <div class="deco-line anim"></div>
+            <p class="anim" style="font-size:16px;color:var(--ink);max-width:480px;">
+                国产替代从"政策口号"正式进入"业绩兑现"阶段。H20停售、国测认证分水岭、Q1财报集体爆发三大标志性事件密集落地
+            </p>
+            <div class="cover-bottom anim">
+                <div class="cover-stats">
+                    <div><div class="cover-stat">43</div><div class="cover-stat-label">本周入库</div></div>
+                    <div><div class="cover-stat">10</div><div class="cover-stat-label">厂商覆盖</div></div>
+                    <div><div class="cover-stat">4</div><div class="cover-stat-label">标志性事件</div></div>
+                    <div><div class="cover-stat">231</div><div class="cover-stat-label">DB总计条目</div></div>
+                </div>
+                <div style="font-size:12px;color:var(--pale);font-family:'JetBrains Mono',monospace;">W22 · 2026</div>
+            </div>
+        </div>
+
+        <!-- 2: OVERVIEW -->
+        <div class="slide" data-i="1">
+            <div class="eyebrow anim">Overview</div>
+            <h2 class="anim">本周<span class="accent">概览</span></h2>
+            <div class="deco-line anim"></div>
+            <div class="feat-grid anim" style="margin-top:20px;">
+                <div class="feat">
+                    <span class="feat-emoji">🚫</span>
+                    <div class="feat-title">H20无限期停售</div>
+                    <div class="feat-desc">英伟达最后一款在华合法高端AI芯片被堵死，国产替代从"可选项"变"必选项"，政策从鼓励升级为强制</div>
+                </div>
+                <div class="feat">
+                    <span class="feat-emoji">🎙️</span>
+                    <div class="feat-title">黄仁勋录音泄露</div>
+                    <div class="feat-desc">910C月产能20万颗（年240万），黄仁勋亲口称"中国会赢AI竞赛"，批评美国出口管制"极其愚蠢"</div>
+                </div>
+                <div class="feat">
+                    <span class="feat-emoji">📋</span>
+                    <div class="feat-title">国测I级认证分水岭</div>
+                    <div class="feat-desc">9款芯片通过I级认证获政企采购"白名单"，寒武纪/昆仑芯/燧原集体缺席面临硬约束</div>
+                </div>
+                <div class="feat">
+                    <span class="feat-emoji">📊</span>
+                    <div class="feat-title">Q1财报集体爆发</div>
+                    <div class="feat-desc">寒武纪首次季度现金流转正8.34亿，摩尔线程首家季度盈利，海光营收破40亿，业绩追上叙事</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3: MARKET SHARE -->
+        <div class="slide" data-i="2">
+            <div class="deco-number anim">01</div>
+            <div class="eyebrow anim">Market Landscape</div>
+            <h2 class="anim">市场份额<span class="accent">加速收敛</span></h2>
+            <p class="anim">国产AI芯片Q1占52.3%首次过半，昇腾37%居首，摩根士丹利预测年底华为占62%</p>
+            <div class="tbl-wrap anim">
+                <table class="tbl">
+                    <thead>
+                        <tr>
+                            <th>厂商</th>
+                            <th>Q1 市占率</th>
+                            <th>年底预测</th>
+                            <th>关键信号</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>华为昇腾</strong></td>
+                            <td class="highlight">37%</td>
+                            <td class="highlight">62%</td>
+                            <td>950PR获75万颗订单，910C年产能240万</td>
+                        </tr>
+                        <tr>
+                            <td><strong>英伟达</strong></td>
+                            <td>42.7%</td>
+                            <td style="color:var(--pale);">8%（预测）</td>
+                            <td>H20无限期停售，份额断崖下跌</td>
+                        </tr>
+                        <tr>
+                            <td><strong>寒武纪</strong></td>
+                            <td>14%</td>
+                            <td>—</td>
+                            <td>思元690量产，字节部署超10万张</td>
+                        </tr>
+                        <tr>
+                            <td><strong>其余国产</strong></td>
+                            <td>~1.3%</td>
+                            <td>—</td>
+                            <td>壁仞/天数/摩尔线程/沐曦争夺份额</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="anim" style="margin-top:auto;padding-top:12px;display:flex;gap:24px;flex-wrap:wrap;">
+                <div style="font-size:12px;color:var(--deep);"><span style="color:var(--orange);font-weight:700;">国产合计</span> Q1首次过半52.3%</div>
+                <div style="font-size:12px;color:var(--deep);"><span style="color:var(--orange);font-weight:700;">昇腾</span> 950PR推理成本$0.60-1.50/百万token</div>
+            </div>
+            <div class="slide-sources anim">
+                <a href="https://m.sohu.com/a/1031945074_122827724/" target="_blank">搜狐</a>
+                <a href="https://news.sina.cn/bignews/insight/2026-06-02/detail-inhzzivn3140797.d.html" target="_blank">新浪</a>
+                <a href="https://xueqiu.com/3477350969/392458159" target="_blank">雪球</a>
+            </div>
+        </div>
+
+        <!-- 4: CERTIFICATION -->
+        <div class="slide" data-i="3">
+            <div class="deco-number anim">02</div>
+            <div class="eyebrow anim">Security Certification · Level I</div>
+            <h2 class="anim">国测I级认证<span class="accent">分水岭</span></h2>
+            <p class="anim">5月26日发布2026年第2号公告，首次纳入AI芯片，9款通过 vs 3家缺席</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;flex:1;" class="anim">
+                <div style="display:flex;flex-direction:column;">
+                    <div style="font-size:12px;color:var(--orange);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:10px;">✅ CERTIFIED · 9款通过</div>
+                    <div class="chip-grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:0;flex:0 1 auto;">
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">🔥</div>
+                            <div class="chip-name">华为昇腾310</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">🔥</div>
+                            <div class="chip-name">华为昇腾910</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">💎</div>
+                            <div class="chip-name">平头哥M530</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">💎</div>
+                            <div class="chip-name">平头哥M890</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">🏔️</div>
+                            <div class="chip-name">壁砺166</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">🌊</div>
+                            <div class="chip-name">海光DCU-3G</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">☀️</div>
+                            <div class="chip-name">天数KCC-V100X</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">🌅</div>
+                            <div class="chip-name">沐曦MXC600</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                        <div class="chip" style="padding:12px;">
+                            <div class="chip-icon" style="height:22px;font-size:18px;">🧵</div>
+                            <div class="chip-name">摩尔线程PH100</div>
+                            <div class="chip-status">通过</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex;flex-direction:column;">
+                    <div style="font-size:12px;color:var(--pale);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:10px;">❌ ABSENT · 3家缺席</div>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                        <div class="feat" style="padding:16px 20px;border-left-color:var(--pale);opacity:0.75;">
+                            <div class="feat-title">寒武纪</div>
+                            <div class="feat-desc" style="font-size:12px;">凭商业体量仍居市场第二（14%），短期影响有限但长期硬约束</div>
+                        </div>
+                        <div class="feat" style="padding:16px 20px;border-left-color:var(--pale);opacity:0.75;">
+                            <div class="feat-title">昆仑芯</div>
+                            <div class="feat-desc" style="font-size:12px;">天池超节点6月上市，百度AI收入136亿占52%，但政企采购受限</div>
+                        </div>
+                        <div class="feat" style="padding:16px 20px;border-left-color:var(--pale);opacity:0.75;">
+                            <div class="feat-title">燧原科技</div>
+                            <div class="feat-desc" style="font-size:12px;">IPO二轮问询中，腾讯营收占比83.79%，客户集中度风险高</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:auto;padding-top:12px;">
+                        <p style="font-size:12px;color:var(--pale);line-height:1.5;">认证要求：硬件架构全自主 / 固件逐行审查 / 供应链无后门</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-sources anim">
+                <a href="https://www.163.com/dy/article/KU3J05EH0511838M.html" target="_blank">芯智讯</a>
+                <a href="http://m.toutiao.com/group/7645908403349160486/" target="_blank">头条</a>
+            </div>
+        </div>
+
+        <!-- 5: Q1 FINANCIALS -->
+        <div class="slide" data-i="4">
+            <div class="deco-number anim">03</div>
+            <div class="eyebrow anim">Q1 Financial Highlights</div>
+            <h2 class="anim">财报<span class="accent">集体爆发</span></h2>
+            <div class="deco-line anim"></div>
+            <div class="data-grid anim">
+                <div class="data-card">
+                    <div style="font-weight:700;font-size:14px;color:var(--deep);margin-bottom:10px;">寒武纪</div>
+                    <div class="data-value" style="font-size:30px;">28.85<span class="data-unit">亿</span></div>
+                    <div class="data-label">Q1 营收 · +159%</div>
+                    <div class="data-change">净利10.13亿 +185%</div>
+                    <div style="margin-top:8px;font-size:12px;color:var(--orange);font-family:'JetBrains Mono',monospace;">现金流转正 8.34亿 · 上市以来首次</div>
+                </div>
+                <div class="data-card">
+                    <div style="font-weight:700;font-size:14px;color:var(--deep);margin-bottom:10px;">摩尔线程</div>
+                    <div class="data-value" style="font-size:30px;">7.38<span class="data-unit">亿</span></div>
+                    <div class="data-label">Q1 营收 · +155%</div>
+                    <div class="data-change">首家季度盈利</div>
+                    <div style="margin-top:8px;font-size:12px;color:var(--orange);font-family:'JetBrains Mono',monospace;">2025全年15.06亿 +243%</div>
+                </div>
+                <div class="data-card">
+                    <div style="font-weight:700;font-size:14px;color:var(--deep);margin-bottom:10px;">海光信息</div>
+                    <div class="data-value" style="font-size:30px;">40.34<span class="data-unit">亿</span></div>
+                    <div class="data-label">Q1 营收 · +68%</div>
+                    <div class="data-change">净利6.87亿 +35.8%</div>
+                    <div style="margin-top:8px;font-size:12px;color:var(--orange);font-family:'JetBrains Mono',monospace;">研发12.11亿 +26.8% 高强度</div>
+                </div>
+            </div>
+            <div class="anim" style="margin-top:auto;padding-top:12px;display:flex;gap:24px;flex-wrap:wrap;">
+                <div style="font-size:12px;color:var(--deep);"><span style="color:var(--orange);font-weight:700;">寒武纪</span> 思元690量产，字节累计10万张</div>
+                <div style="font-size:12px;color:var(--deep);"><span style="color:var(--orange);font-weight:700;">摩尔线程</span> 万卡集群已建，正研10万卡</div>
+                <div style="font-size:12px;color:var(--deep);"><span style="color:var(--orange);font-weight:700;">海光</span> DCU深度兼容CUDA，迁移极低</div>
+            </div>
+            <div class="slide-sources anim">
+                <a href="https://m.sohu.com/a/1031945074_122827724/" target="_blank">搜狐</a>
+                <a href="http://m.toutiao.com/group/7645926650734985734/" target="_blank">头条</a>
+                <a href="https://www.toutiao.com/article/7645354624257393178/" target="_blank">证券日报</a>
+            </div>
+        </div>
+
+        <!-- 6: PRODUCTION & ORDERS -->
+        <div class="slide" data-i="5">
+            <div class="deco-number anim">04</div>
+            <div class="eyebrow anim">Production Capacity & Orders</div>
+            <h2 class="anim">产能与<span class="accent">订单</span>密集落地</h2>
+            <p class="anim">量化数据正在替代"国产替代"的模糊叙事，成为资本市场定价依据</p>
+            <div class="data-grid anim" style="grid-template-columns:repeat(2,1fr);">
+                <div class="data-card">
+                    <div style="font-weight:700;font-size:14px;color:var(--deep);margin-bottom:10px;">华为昇腾 910C</div>
+                    <div class="data-value">240<span class="data-unit">万颗/年</span></div>
+                    <div class="data-label">月产能20万颗 · 黄仁勋录音确认</div>
+                    <div class="data-change">实际场景性能表现亮眼</div>
+                </div>
+                <div class="data-card">
+                    <div style="font-weight:700;font-size:14px;color:var(--deep);margin-bottom:10px;">华为昇腾 950PR</div>
+                    <div class="data-value">75<span class="data-unit">万颗</span></div>
+                    <div class="data-label">批量订单 · Q1已批量出货</div>
+                    <div class="data-change">推理性能比H20高50-150%</div>
+                </div>
+                <div class="data-card">
+                    <div style="font-weight:700;font-size:14px;color:var(--deep);margin-bottom:10px;">平头哥 真武</div>
+                    <div class="data-value">56<span class="data-unit">万片</span></div>
+                    <div class="data-label">累计出货 · 覆盖20+行业400+客户</div>
+                    <div class="data-change">V900/J900两代芯片路线图</div>
+                </div>
+                <div class="data-card">
+                    <div style="font-weight:700;font-size:14px;color:var(--deep);margin-bottom:10px;">海光 DCU</div>
+                    <div class="data-value">8-10<span class="data-unit">万颗</span></div>
+                    <div class="data-label">2026年出货预计 · 营收120-150亿</div>
+                    <div class="data-change">毛利率60%+ · CUDA兼容</div>
+                </div>
+            </div>
+            <div class="slide-sources anim">
+                <a href="https://c.m.163.com/news/a/KUGL5KB905568V3Y.html" target="_blank">网易新闻</a>
+                <a href="https://xueqiu.com/3477350969/392458159" target="_blank">雪球</a>
+                <a href="https://www.163.com/dy/article/KUB4GACP0531SG98.html" target="_blank">网易</a>
+                <a href="https://caifuhao.eastmoney.com/news/20260531053618955733390" target="_blank">东方财富</a>
+            </div>
+        </div>
+
+        <!-- 7: DEEPSEEK V4 ADAPTATION -->
+        <div class="slide" data-i="6">
+            <div class="deco-number anim" style="opacity:0.08;">D</div>
+            <div class="eyebrow anim">Ecosystem Adaptation</div>
+            <h2 class="anim">DeepSeek-V4 × <span class="accent">国产芯片适配</span></h2>
+            <p class="anim">生态适配竞赛白热化，模型适配速度成为衡量竞争力的硬指标</p>
+            <div class="chip-grid anim">
+                <div class="chip">
+                    <div class="chip-icon">🔥</div>
+                    <div class="chip-name">华为昇腾</div>
+                    <div class="chip-status">首发适配</div>
+                    <div class="chip-desc">950超节点推理 ~20ms</div>
+                </div>
+                <div class="chip">
+                    <div class="chip-icon">🏔️</div>
+                    <div class="chip-name">壁砺166</div>
+                    <div class="chip-status">适配验证完成</div>
+                    <div class="chip-desc">DeepSeek V4优化</div>
+                </div>
+                <div class="chip">
+                    <div class="chip-icon">☀️</div>
+                    <div class="chip-name">天数智芯</div>
+                    <div class="chip-status">深度适配</div>
+                    <div class="chip-desc">KernelSwift算子系统</div>
+                </div>
+                <div class="chip">
+                    <div class="chip-icon">🧵</div>
+                    <div class="chip-name">摩尔线程</div>
+                    <div class="chip-status">吞吐提升80倍</div>
+                    <div class="chip-desc">S5000持续优化</div>
+                </div>
+                <div class="chip">
+                    <div class="chip-icon">🌅</div>
+                    <div class="chip-name">沐曦</div>
+                    <div class="chip-status">Day 0适配</div>
+                    <div class="chip-desc">Step 3.7 Flash</div>
+                </div>
+                <div class="chip">
+                    <div class="chip-icon">⚡</div>
+                    <div class="chip-name">昆仑芯</div>
+                    <div class="chip-status">天池超节点</div>
+                    <div class="chip-desc">6月上市 · 吞吐+25%</div>
+                </div>
+                <div class="chip">
+                    <div class="chip-icon">💎</div>
+                    <div class="chip-name">平头哥</div>
+                    <div class="chip-status">生态布局</div>
+                    <div class="chip-desc">M890 128卡超节点</div>
+                </div>
+                <div class="chip">
+                    <div class="chip-icon">🌊</div>
+                    <div class="chip-name">海光DCU</div>
+                    <div class="chip-status">CUDA兼容</div>
+                    <div class="chip-desc">迁移成本极低</div>
+                </div>
+            </div>
+            <div class="slide-sources anim">
+                <a href="https://www.163.com/dy/article/KU8SOHE705566ZHB.html" target="_blank">网易</a>
+                <a href="https://c.m.163.com/news/a/KUCEJJ2B05568W0A.html" target="_blank">网易新闻</a>
+                <a href="https://finance.sina.com.cn/jjxw/2026-06-02/doc-inhzyxfm7772163.shtml" target="_blank">新浪财经</a>
+            </div>
+        </div>
+
+        <!-- 8: IPO & ANALYST COVERAGE -->
+        <div class="slide" data-i="7">
+            <div class="eyebrow anim">IPO Pipeline & Analyst Coverage</div>
+            <h2 class="anim">IPO <span class="accent">× 券商覆盖</span></h2>
+            <div class="deco-line anim"></div>
+            <div class="ipo-grid anim">
+                <div class="ipo-card featured">
+                    <div class="ipo-tag">科创板 · 二轮问询回复</div>
+                    <div class="ipo-name">燧原科技</div>
+                    <div class="ipo-detail">
+                        2025年营收 <strong>9.9亿</strong><br>
+                        腾讯占比 <strong>83.79%</strong>（8.3亿）<br>
+                        亏损收窄 16.65亿→11.64亿<br>
+                        潜在客户A/F/B已完成测试<br>
+                        募资投向第五/六代AI芯片
+                    </div>
+                </div>
+                <div class="ipo-card">
+                    <div class="ipo-tag">已上市 · 两家券商首次覆盖</div>
+                    <div class="ipo-name">沐曦</div>
+                    <div class="ipo-detail">
+                        华泰买入 目标价 <strong style="color:var(--orange);">898.6元</strong><br>
+                        预计26/27/28年营收 <strong style="color:var(--orange);">31/62/92亿</strong><br>
+                        C600预计26H1量产<br>
+                        MXMACA兼容CUDA 95%<br>
+                        开发者近50万
+                    </div>
+                </div>
+                <div class="ipo-card">
+                    <div class="ipo-tag">已上市 · 华鑫首次覆盖</div>
+                    <div class="ipo-name">壁仞科技</div>
+                    <div class="ipo-detail">
+                        2025年营收 <strong style="color:var(--orange);">10.35亿</strong> +207.2%<br>
+                        BR166 Chiplet 896GB/s<br>
+                        <strong style="color:var(--orange);">BR20X 2026年商业化</strong><br>
+                        未完成订单8.22亿<br>
+                        框架协议超12.41亿
+                    </div>
+                </div>
+            </div>
+            <div class="anim" style="margin-top:auto;padding-top:12px;display:flex;gap:20px;flex-wrap:wrap;">
+                <div style="font-size:12px;color:var(--gray);">✅ 天数智芯 · 海通国际首次覆盖，目标价596.7港元</div>
+                <div style="font-size:12px;color:var(--gray);">✅ 华创 · 沐曦强推评级</div>
+            </div>
+            <div class="slide-sources anim">
+                <a href="https://finance.sina.com.cn/jjxw/2026-06-04/doc-iniaecsh3985307.shtml" target="_blank">新浪财经</a>
+                <a href="http://news.hexun.com/2026-06-03/224265928.html" target="_blank">和讯网</a>
+                <a href="https://wap.stockstar.com/detail/IG2026060300023005" target="_blank">证券之星</a>
+                <a href="https://www.qcc.com/crun/4a0e6ef00bf5a6a7bc465cc7ae7b6b24.html" target="_blank">企查查</a>
+            </div>
+        </div>
+
+        <!-- 9: TREND ANALYSIS -->
+        <div class="slide" data-i="8">
+            <div class="eyebrow anim">Trend Analysis</div>
+            <h2 class="anim">四大<span class="accent">趋势研判</span></h2>
+            <div class="deco-line anim"></div>
+            <div class="trend-grid anim" style="gap:10px;">
+                <div class="trend-item" style="padding:18px 24px;">
+                    <div class="trend-num" style="font-size:20px;margin-bottom:2px;">I</div>
+                    <div class="trend-title" style="font-size:15px;margin-bottom:4px;">国测认证成行业分水岭</div>
+                    <div class="trend-desc" style="font-size:12px;">获I级认证的7家厂商进入政企采购"白名单"，未获认证的3家在关键领域被排除。寒武纪凭商业体量仍居第二，短期影响有限但长期是硬约束。</div>
+                </div>
+                <div class="trend-item" style="padding:18px 24px;">
+                    <div class="trend-num" style="font-size:20px;margin-bottom:2px;">II</div>
+                    <div class="trend-title" style="font-size:15px;margin-bottom:4px;">产能数据密集浮出水面</div>
+                    <div class="trend-desc" style="font-size:12px;">910C年产能240万颗、950PR获75万颗订单、真武出货56万片、海光DCU 8-10万颗——量化数据正在替代模糊叙事，成为资本市场定价依据。</div>
+                </div>
+                <div class="trend-item" style="padding:18px 24px;">
+                    <div class="trend-num" style="font-size:20px;margin-bottom:2px;">III</div>
+                    <div class="trend-title" style="font-size:15px;margin-bottom:4px;">消费端破局</div>
+                    <div class="trend-desc" style="font-size:12px;">摩尔线程AICUBE面向家庭用户，沐曦合资优必选进军具身智能，国产GPU厂商从"算力供应商"向"算力+应用"一体化延伸，寻找新增长曲线。</div>
+                </div>
+                <div class="trend-item" style="padding:18px 24px;">
+                    <div class="trend-num" style="font-size:20px;margin-bottom:2px;">IV</div>
+                    <div class="trend-title" style="font-size:15px;margin-bottom:4px;">生态适配竞赛白热化</div>
+                    <div class="trend-desc" style="font-size:12px;">DeepSeek-V4成为各厂商适配的"标准考试"，昇腾/壁仞/天数/摩尔线程均宣布完成适配。模型适配速度正在成为衡量国产芯片竞争力的硬指标。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10: NEXT WEEK + CTA -->
+        <div class="slide cta" data-i="9">
+            <div class="eyebrow anim">Next Week Focus</div>
+            <h2 class="anim">下周关注</h2>
+            <div class="deco-line anim"></div>
+            <div style="display:flex;flex-direction:column;gap:16px;max-width:480px;margin:0 auto;" class="anim">
+                <div style="font-size:15px;color:var(--cream);display:flex;gap:12px;align-items:center;">
+                    <span style="color:var(--orange-soft);font-family:'Playfair Display',serif;font-style:italic;font-size:20px;">I</span>
+                    沐曦曦云C600量产进展与首单落地
+                </div>
+                <div style="font-size:15px;color:var(--cream);display:flex;gap:12px;align-items:center;">
+                    <span style="color:var(--orange-soft);font-family:'Playfair Display',serif;font-style:italic;font-size:20px;">II</span>
+                    寒武纪思元690大客户部署进展
+                </div>
+                <div style="font-size:15px;color:var(--cream);display:flex;gap:12px;align-items:center;">
+                    <span style="color:var(--orange-soft);font-family:'Playfair Display',serif;font-style:italic;font-size:20px;">III</span>
+                    昇腾950DT Q4上市前生态准备
+                </div>
+                <div style="font-size:15px;color:var(--cream);display:flex;gap:12px;align-items:center;">
+                    <span style="color:var(--orange-soft);font-family:'Playfair Display',serif;font-style:italic;font-size:20px;">IV</span>
+                    摩尔线程AICUBE 618首销数据
+                </div>
+                <div style="font-size:15px;color:var(--cream);display:flex;gap:12px;align-items:center;">
+                    <span style="color:var(--orange-soft);font-family:'Playfair Display',serif;font-style:italic;font-size:20px;">V</span>
+                    壁仞BR20X商业化上市进展
+                </div>
+            </div>
+            <div style="margin-top:auto;padding-top:24px;" class="anim">
+                <p style="font-size:12px;color:rgba(255,255,255,0.3);text-align:center;">数据来源：长期计划/信息分析洞察计划 · 每日扫描更新 · DB总计231条</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="slide-nav" id="slideNav">
+        <button id="prevBtn" aria-label="Previous">&#8249;</button>
+        <span class="nav-counter" id="counter"></span>
+        <button id="nextBtn" aria-label="Next">&#8250;</button>
+        <button id="exportBtn" aria-label="导出图片" title="导出所有页面为 PNG">💾</button>
+    </div>
+
+    <script>
+        let cur = 0;
+        const N = 10;
+        let isMobile = window.innerWidth <= 768;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const counter = document.getElementById('counter');
+        const mobileProgress = document.getElementById('mobileProgress');
+        const mobileProgressBar = document.getElementById('mobileProgressBar');
+
+        function checkMobile() {
+            isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                mobileProgress.style.display = 'block';
+            } else {
+                mobileProgress.style.display = 'none';
+            }
+            updateNav();
+        }
+
+        window.addEventListener('resize', checkMobile);
+        checkMobile();
+
+        function goTo(i) {
+            if (i < 0 || i >= N || i === cur) return;
+            const slides = document.querySelectorAll('.slide');
+            slides[cur].classList.remove('active');
+            slides[i].querySelectorAll('.anim').forEach(el => {
+                el.style.animation = 'none';
+                void el.offsetHeight;
+                el.style.animation = '';
+            });
+            slides[i].classList.add('active');
+            cur = i;
+            updateNav();
+            if (isMobile) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function goNext() { goTo(cur + 1); }
+        function goPrev() { goTo(cur - 1); }
+
+        prevBtn.addEventListener('click', goPrev);
+        nextBtn.addEventListener('click', goNext);
+
+        function updateNav() {
+            prevBtn.disabled = cur === 0;
+            nextBtn.disabled = cur === N - 1;
+            counter.textContent = (cur + 1) + ' / ' + N;
+            if (isMobile) {
+                const progress = ((cur + 1) / N) * 100;
+                mobileProgressBar.style.width = progress + '%';
+            }
+        }
+        updateNav();
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goNext(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const minSwipeDistance = 50;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const swipeDistance = touchEndX - touchStartX;
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) { goPrev(); }
+                else { goNext(); }
+            }
+        }, { passive: true });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script>
+    document.getElementById('exportBtn').addEventListener('click', async () => {
+        const btn = document.getElementById('exportBtn');
+        btn.disabled = true; btn.style.opacity = '.4';
+        const slides = document.querySelectorAll('.slide');
+        const savedCur = cur;
+        const zip = new JSZip();
+        for (let i = 0; i < slides.length; i++) {
+            slides.forEach((s, idx) => {
+                if (idx === i) {
+                    s.classList.add('active');
+                    s.style.display = '';
+                } else {
+                    s.classList.remove('active');
+                    s.style.display = 'none';
+                }
+            });
+            slides[i].querySelectorAll('.anim').forEach(e => { e.style.opacity='1'; e.style.transform='none'; e.style.animation='none'; });
+            await new Promise(r => setTimeout(r, 100));
+            const canvas = await html2canvas(slides[i], { scale: 2, backgroundColor: '#FAFAF7', useCORS: true, logging: false });
+            const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+            zip.file(`slide-${i+1}.png`, blob);
+        }
+        goTo(savedCur);
+        slides.forEach(s => s.querySelectorAll('.anim').forEach(e => { e.style.removeProperty('opacity'); e.style.removeProperty('transform'); e.style.removeProperty('animation'); }));
+        const content = await zip.generateAsync({ type: 'blob' });
+        saveAs(content, '国产算力周报2026W22-slides.zip');
+        btn.disabled = false; btn.style.opacity = '1';
+    });
+    </script>
+</body>
+</html>
