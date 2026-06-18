@@ -441,6 +441,30 @@
         .trend-title { font-weight:700; font-size:16px; color:var(--deep); margin-bottom:6px; }
         .trend-desc { font-size:13px; color:var(--gray); line-height:1.6; max-width:600px; }
 
+        /* P9: five trends, evenly distributed */
+        .trend-grid--rows {
+            margin-top: 18px; gap: 10px;
+            grid-template-rows: repeat(5, 1fr);
+        }
+        .trend-grid--rows .trend-item {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            align-items: center;
+            gap: 16px;
+            padding: 0 26px;
+        }
+        .trend-grid--rows .trend-num {
+            font-size: 30px; margin: 0;
+            text-align: center; line-height: 1;
+        }
+        .trend-grid--rows .trend-title { font-size: 15px; margin-bottom: 3px; }
+        .trend-grid--rows .trend-desc { font-size: 12px; line-height: 1.5; }
+        @media (max-width: 768px) {
+            .trend-grid--rows { grid-template-rows: none; gap: 12px; }
+            .trend-grid--rows .trend-item { padding: 16px 18px; }
+            .trend-grid--rows .trend-num { font-size: 24px; }
+        }
+
         /* SOURCE LINKS */
         .slide-sources {
             margin-top: auto;
@@ -813,31 +837,41 @@
             <div class="eyebrow anim">Trend Analysis</div>
             <h2 class="anim">五大<span class="accent">趋势研判</span></h2>
             <div class="deco-line anim"></div>
-            <div class="trend-grid anim" style="gap:8px;">
-                <div class="trend-item" style="padding:14px 22px;animation-delay:0.15s;">
-                    <div class="trend-num" style="font-size:18px;margin-bottom:1px;">I</div>
-                    <div class="trend-title" style="font-size:14px;margin-bottom:2px;">资本化进程全面收官</div>
-                    <div class="trend-desc" style="font-size:12px;">燧原过会标志「四小龙」全部进入公开资本市场，后续重点转向市值管理、股东回报与盈利兑现。</div>
+            <div class="trend-grid anim trend-grid--rows">
+                <div class="trend-item">
+                    <div class="trend-num">I</div>
+                    <div class="trend-body">
+                        <div class="trend-title">资本化进程全面收官</div>
+                        <div class="trend-desc">燧原过会标志「四小龙」全部进入公开资本市场，后续重点转向市值管理、股东回报与盈利兑现。</div>
+                    </div>
                 </div>
-                <div class="trend-item" style="padding:14px 22px;animation-delay:0.23s;">
-                    <div class="trend-num" style="font-size:18px;margin-bottom:1px;">II</div>
-                    <div class="trend-title" style="font-size:14px;margin-bottom:2px;">大厂验证成商业化加速器</div>
-                    <div class="trend-desc" style="font-size:12px;">字节同时接洽天数智芯与昆仑芯，寒武纪已是主力供应商，国产算力正式进入大厂验证期。</div>
+                <div class="trend-item">
+                    <div class="trend-num">II</div>
+                    <div class="trend-body">
+                        <div class="trend-title">大厂验证成商业化加速器</div>
+                        <div class="trend-desc">字节同时接洽天数智芯与昆仑芯，寒武纪已是主力供应商，国产算力正式进入大厂验证期。</div>
+                    </div>
                 </div>
-                <div class="trend-item" style="padding:14px 22px;animation-delay:0.31s;">
-                    <div class="trend-num" style="font-size:18px;margin-bottom:1px;">III</div>
-                    <div class="trend-title" style="font-size:14px;margin-bottom:2px;">软件生态竞争白热化</div>
-                    <div class="trend-desc" style="font-size:12px;">TileLang-MUSA开源对阵MXMACA百万开发者，GLM-5.2发布首日完成全平台适配，速度前所未有。</div>
+                <div class="trend-item">
+                    <div class="trend-num">III</div>
+                    <div class="trend-body">
+                        <div class="trend-title">软件生态竞争白热化</div>
+                        <div class="trend-desc">TileLang-MUSA开源对阵MXMACA百万开发者，GLM-5.2发布首日完成全平台适配，速度前所未有。</div>
+                    </div>
                 </div>
-                <div class="trend-item" style="padding:14px 22px;animation-delay:0.39s;">
-                    <div class="trend-num" style="font-size:18px;margin-bottom:1px;">IV</div>
-                    <div class="trend-title" style="font-size:14px;margin-bottom:2px;">算力定价权争夺加剧</div>
-                    <div class="trend-desc" style="font-size:12px;">上游100万颗缺口，下游GLM-5.2需求达供给20倍，产业链从「产能竞争」转向「定价权竞争」。</div>
+                <div class="trend-item">
+                    <div class="trend-num">IV</div>
+                    <div class="trend-body">
+                        <div class="trend-title">算力定价权争夺加剧</div>
+                        <div class="trend-desc">上游100万颗缺口，下游GLM-5.2需求达供给20倍，产业链从「产能竞争」转向「定价权竞争」。</div>
+                    </div>
                 </div>
-                <div class="trend-item" style="padding:14px 22px;animation-delay:0.47s;">
-                    <div class="trend-num" style="font-size:18px;margin-bottom:1px;">V</div>
-                    <div class="trend-title" style="font-size:14px;margin-bottom:2px;">平头哥低调崛起</div>
-                    <div class="trend-desc" style="font-size:12px;">真武芯片金融部署破10万卡，下半年收入环比+400%，增速Top1，在金融能源垂直场景快速渗透。</div>
+                <div class="trend-item">
+                    <div class="trend-num">V</div>
+                    <div class="trend-body">
+                        <div class="trend-title">平头哥低调崛起</div>
+                        <div class="trend-desc">真武芯片金融部署破10万卡，下半年收入环比+400%，增速Top1，在金融能源垂直场景快速渗透。</div>
+                    </div>
                 </div>
             </div>
             <div class="slide-sources anim">
