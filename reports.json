@@ -1,5 +1,16 @@
 [
   {
+    "id": "2026-W25",
+    "year": 2026,
+    "week": "W25",
+    "dateRange": "2026年6月19日 - 6月25日",
+    "title": "国产算力动态周报",
+    "summary": "寒武纪市值逼近万亿、高盛目标价2406元；摩尔线程MusaCoder开源反超Claude Opus，昇腾950DT量产提前至8月，机构预测2026国产AI芯片市占率首超50%",
+    "href": "reports/2026-W25.html",
+    "tags": ["寒武纪万亿", "MusaCoder开源", "市占率过半"],
+    "latest": true
+  },
+  {
     "id": "2026-W24",
     "year": 2026,
     "week": "W24",
@@ -8,7 +19,7 @@
     "summary": "资本化收官周：燧原IPO过会「四小龙」全部会师资本市场，沐曦启动H股，字节洽购天数智芯，算力「通胀」正式开启",
     "href": "reports/2026-W24.html",
     "tags": ["燧原过会", "字节验证", "算力通胀"],
-    "latest": true
+    "latest": false
   },
   {
     "id": "2026-W23",
