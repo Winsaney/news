@@ -1,5 +1,16 @@
 [
   {
+    "id": "2026-W26",
+    "year": 2026,
+    "week": "W26",
+    "dateRange": "2026年6月26日 - 7月2日",
+    "title": "国产算力动态周报",
+    "summary": "寒武纪突破万亿市值，昆仑芯冲刺港股IPO；昇腾万卡集群落地并拟出海韩国，美团LongCat-2.0在国产算力完成万亿参数模型预训练",
+    "href": "reports/2026-W26.html",
+    "tags": ["寒武纪万亿", "昆仑芯IPO", "万卡训练"],
+    "latest": true
+  },
+  {
     "id": "2026-W25",
     "year": 2026,
     "week": "W25",
@@ -8,7 +19,7 @@
     "summary": "寒武纪市值逼近万亿、高盛目标价2406元；摩尔线程MusaCoder开源反超Claude Opus，昇腾950DT量产提前至8月，机构预测2026国产AI芯片市占率首超50%",
     "href": "reports/2026-W25.html",
     "tags": ["寒武纪万亿", "MusaCoder开源", "市占率过半"],
-    "latest": true
+    "latest": false
   },
   {
     "id": "2026-W24",
