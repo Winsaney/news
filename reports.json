@@ -1,5 +1,16 @@
 [
   {
+    "id": "2026-W32",
+    "year": 2026,
+    "week": "W32",
+    "dateRange": "2026年8月7日 - 8月13日",
+    "title": "国产算力扫描周报",
+    "summary": "中报季全面爆发：寒武纪净利23.11亿/摩尔线程营收17.36亿亏损收窄95%，摩尔线程启动H股筹备，海光披露CPU+DCU双芯融合路线，燧原×腾讯混元Hy3实现设计级芯模协同",
+    "href": "reports/2026-W32.html",
+    "tags": ["中报爆发", "摩尔H股", "双芯融合", "芯模协同"],
+    "latest": true
+  },
+  {
     "id": "2026-W31",
     "year": 2026,
     "week": "W31",
@@ -8,7 +19,7 @@
     "summary": "燧原科技IPO排期落地9月询价申购，MiniMax H3引爆第二轮国产GPU极速适配潮，DeepSeek落地GW级纯国产算力中心，海光DTK 26.04稳定运行10万亿参数",
     "href": "reports/2026-W31.html",
     "tags": ["燧原IPO", "MiniMax适配", "GW级算力", "海光DTK"],
-    "latest": true
+    "latest": false
   },
   {
     "id": "2026-W30",
